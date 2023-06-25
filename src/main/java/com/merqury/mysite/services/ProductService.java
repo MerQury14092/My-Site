@@ -1,5 +1,6 @@
 package com.merqury.mysite.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.merqury.mysite.models.Product;
@@ -15,6 +16,24 @@ public class ProductService {
 
     public List<Product> getProducts() {
         return repository.findAll();
+    }
+
+    public List<List<Product>> getProductsInTriangles(){
+        List<Product> all = repository.findAll();
+        List<List<Product>> res = new ArrayList<>();
+        for (int i = 0; i < all.size(); i++) {
+            List<Product> tmp = new ArrayList<>();
+            switch (i % 3){
+                case 0 -> {
+                    tmp = new ArrayList<>(3);
+                    res.add(tmp);
+                    tmp.add(all.get(i));
+                }
+                case 1, 2 ->
+                    tmp.add(all.get(i));
+            }
+        }
+        return res;
     }
 
     public void addProduct(Product product){

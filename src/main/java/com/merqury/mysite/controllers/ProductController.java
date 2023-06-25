@@ -33,7 +33,6 @@ public class ProductController {
 
     @PostMapping("/prod/create")
     public String addProduct(Product product){
-
         productService.addProduct(product);
         return "redirect:/";
     }
