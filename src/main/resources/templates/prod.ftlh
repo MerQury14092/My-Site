@@ -12,6 +12,5 @@
         <form action="/prod/delete/${product.id}" method="post">
             <input type="submit" value="Удалить товар">
         </form>
-        <a href="/prod/buy/${product.id}">Продай, зайбал</a>
     </body>
 </html>

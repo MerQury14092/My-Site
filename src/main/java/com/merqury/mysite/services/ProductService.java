@@ -1,6 +1,5 @@
 package com.merqury.mysite.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.merqury.mysite.models.Product;
@@ -19,7 +18,6 @@ public class ProductService {
     }
 
     public void addProduct(Product product){
-        product.setId(ID++);
         repository.save(product);
     }
 
@@ -30,4 +28,5 @@ public class ProductService {
     public void rmProduct(long id){
         repository.deleteById(id);
     }
+
 }
