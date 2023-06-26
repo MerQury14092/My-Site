@@ -1,10 +1,40 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 <head>
-    <title>Nsds</title>
+    <title>Z</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
     <meta name="theme-color" content="#712cf9">
+    <style>
+        .b-popup{
+            width:100%;
+            height: 2000px;
+            background-color: rgba(0,0,0,0.5);
+            overflow:hidden;
+            position:fixed;
+            top:0px;
+        }
+        .b-popup .b-popup-content{
+            margin:40px auto 0px auto;
+            width:100px;
+            height: 40px;
+            padding:10px;
+            background-color: #c5c5c5;
+            border-radius:5px;
+            box-shadow: 0px 0px 10px #000;
+        }
+        body{
+            background-color: #2b3035;
+        }
+        .col {
+            animation: 2s show ease;
+        }
+
+        @keyframes show {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
 </head>
 
 <body>
@@ -26,7 +56,7 @@
                     <#if prod[0]??>
                         <div class="col">
                             <div class="card shadow-sm">
-                                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="true"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">No Image</text></svg>
+                                <img class="image" src="${prod[0].urlToImage}">
                                 <div class="card-body">
                                     <p class="card-text"><b>${prod[0].title}</b></p><br>
                                     <p class="card-text">${prod[0].description}</p>
@@ -44,7 +74,7 @@
                     <#if prod[1]??>
                     <div class="col">
                         <div class="card shadow-sm">
-                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">No Image</text></svg>
+                            <img class="image" src="${prod[1].urlToImage}">
                             <div class="card-body">
                                 <p class="card-text"><b>${prod[1].title}</b></p><br>
                                 <p class="card-text">${prod[1].description}</p>
@@ -62,7 +92,7 @@
                     <#if prod[2]??>
                     <div class="col">
                         <div class="card shadow-sm">
-                            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">No Image</text></svg>
+                            <img class="image" src="${prod[2].urlToImage}">
                             <div class="card-body">
                                 <p class="card-text"><b>${prod[2].title}</b></p><br>
                                 <p class="card-text">${prod[2].description}</p>

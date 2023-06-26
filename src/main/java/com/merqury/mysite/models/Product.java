@@ -14,13 +14,14 @@ import java.time.LocalDateTime;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long   id;
-    private String title,
-                   description,
-                   city,
-                   author;
-    private int    price;
-    private LocalDateTime dateOfCreated;
+    private long            id;
+    private String          title,
+                            description,
+                            city,
+                            author;
+    private int             price;
+    private LocalDateTime   dateOfCreated;
+    private String          urlToImage;
 
     @PrePersist
     private void init(){

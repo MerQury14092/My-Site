@@ -8,16 +8,23 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
 public class ProductController {
 
     private final ProductService productService;
+    private String urlToStandartImage;
+    {
+        urlToStandartImage = "https://cdn.discordapp.com/attachments/1093274890800468138/1122610759831130204/zaavito.jpg";
+    }
 
     @GetMapping("/")
     public String products(Model model){
         model.addAttribute("products", productService.getProducts());
+        model.addAttribute("standartUrl", urlToStandartImage);
+
         return "products_new";
     }
 
