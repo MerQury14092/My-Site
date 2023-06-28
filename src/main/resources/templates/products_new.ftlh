@@ -6,23 +6,6 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
     <meta name="theme-color" content="#712cf9">
     <style>
-        .b-popup{
-            width:100%;
-            height: 2000px;
-            background-color: rgba(0,0,0,0.5);
-            overflow:hidden;
-            position:fixed;
-            top:0px;
-        }
-        .b-popup .b-popup-content{
-            margin:40px auto 0px auto;
-            width:100px;
-            height: 40px;
-            padding:10px;
-            background-color: #c5c5c5;
-            border-radius:5px;
-            box-shadow: 0px 0px 10px #000;
-        }
         body{
             background-color: #2b3035;
         }
@@ -34,6 +17,44 @@
             from { opacity: 0; }
             to { opacity: 1; }
         }
+        #window {
+            width: 300px;
+            height: 300px;
+            text-align: center;
+            padding: 15px;
+            border: 3px solid #212529;
+            border-radius: 10px;
+            color: #212529;
+            /*позиционируем и центрируем*/
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+            background-color: #2b3035;
+            overflow: hidden;
+        }
+        #hide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgb(0,0,0,0.5);
+        }
+        #create {
+            display: none;
+        }
+        #create:target {
+            display: block;
+        }
+        .text-field {
+            margin-top: 10px;
+            border-width: 0;
+            border-radius: 20px;
+        }
+
     </style>
 </head>
 
@@ -43,7 +64,7 @@
         <a href="/" class="navbar-brand d-flex align-items-center">
             <strong>Za Avito</strong>
         </a>
-        <a href="/prod/create/page" class="navbar-brand d-flex align-items-center">
+        <a href="#create" class="navbar-brand d-flex align-items-center">
             <strong>Создать объявление</strong>
         </a>
     </div>
@@ -56,7 +77,7 @@
                     <#if prod[0]??>
                         <div class="col">
                             <div class="card shadow-sm">
-                                <img class="image" src="${prod[0].urlToImage}">
+                                <img class="image" src="${prod[0].urlToImage}" height="250">
                                 <div class="card-body">
                                     <p class="card-text"><b>${prod[0].title}</b></p><br>
                                     <p class="card-text">${prod[0].description}</p>
@@ -74,7 +95,7 @@
                     <#if prod[1]??>
                     <div class="col">
                         <div class="card shadow-sm">
-                            <img class="image" src="${prod[1].urlToImage}">
+                            <img class="image" src="${prod[1].urlToImage}" height="250">
                             <div class="card-body">
                                 <p class="card-text"><b>${prod[1].title}</b></p><br>
                                 <p class="card-text">${prod[1].description}</p>
@@ -92,7 +113,7 @@
                     <#if prod[2]??>
                     <div class="col">
                         <div class="card shadow-sm">
-                            <img class="image" src="${prod[2].urlToImage}">
+                            <img class="image" src="${prod[2].urlToImage}" height="250">
                             <div class="card-body">
                                 <p class="card-text"><b>${prod[2].title}</b></p><br>
                                 <p class="card-text">${prod[2].description}</p>
@@ -111,6 +132,27 @@
             </div>
         </div>
     </#list>
+
+    <div id="create">
+        <a href="#" id="hide"></a>
+        <div id="window">
+            <form action="/prod/create" method="post">
+                <input type="text" name="title" placeholder="Название" class="text-field">
+                <br>
+                <input type="text" name="description" placeholder="Описание" class="text-field">
+                <br>
+                <input type="number" name="price" placeholder="Цена &#8381;" class="text-field">
+                <br>
+                <input type="text" name="city" placeholder="Город" class="text-field">
+                <br>
+                <input type="text" name="author" placeholder="Автор" class="text-field">
+                <br>
+                <input type="text" name="urlToImage" placeholder="URL фото" class="text-field">
+                <br>
+                <input type="submit" value="Добавить товар" class="text-field">
+            </form>
+        </div>
+    </div>
 </main>
 </body>
 </html>
