@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ProductService {
     private final ProductRepository repository;
-    private int ID;
+    private long ID;
 
     public List<Product> getProducts() {
         return repository.findAll();
@@ -37,15 +37,27 @@ public class ProductService {
     }
 
     public void addProduct(Product product){
+        if(product.getDescription() == null || product.getDescription().equals(""))
+            product.setDescription("No description");
+        if(product.getUrlToImage() == null || product.getUrlToImage().equals(""))
+            product.setUrlToImage("https://t4.ftcdn.net/jpg/04/99/93/31/360_F_499933117_ZAUBfv3P1HEOsZDrnkbNCt4jc3AodArl.jpg");
         repository.save(product);
     }
 
-    public Product getProductById(int id){
-        return repository.findById((long) id).orElse(null);
+    public Product getProductById(long id){
+        return repository.findById(id).orElse(null);
     }
 
     public void rmProduct(long id){
+        if(id == 0)
+            return;
         repository.deleteById(id);
+    }
+
+    public void changeProduct(long id, Product newProduct){
+        Product base = repository.findById(id).orElse(null);
+        Product.concatenate(base, newProduct);
+        repository.flush();
     }
 
 }

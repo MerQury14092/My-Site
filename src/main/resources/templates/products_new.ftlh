@@ -67,6 +67,7 @@
         <a href="#create" class="navbar-brand d-flex align-items-center">
             <strong>Создать объявление</strong>
         </a>
+        <a href="/api" class="navbar-brand d-flex align-items-center">API</a>
     </div>
 </div>
 <main>
@@ -85,7 +86,7 @@
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location.href='/prod/${prod[0].id}'">Подробнее</button>
                                         </div>
-                                        <small class="text-body-secondary">${prod[0].price} &#8381;</small>
+                                        <small class="text-body-secondary price">${prod[0].price}</small>
                                         <small class="text-body-secondary">${prod[0].dateOfCreated.toLocalDate()}  ${prod[0].dateOfCreated.toLocalTime()}</small>
                                     </div>
                                 </div>
@@ -103,7 +104,7 @@
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location.href='/prod/${prod[1].id}'">Подробнее</button>
                                     </div>
-                                    <small class="text-body-secondary">${prod[1].price} &#8381;</small>
+                                    <small class="text-body-secondary price">${prod[1].price}</small>
                                     <small class="text-body-secondary">${prod[1].dateOfCreated.toLocalDate()}  ${prod[1].dateOfCreated.toLocalTime()}</small>
                                 </div>
                             </div>
@@ -121,7 +122,7 @@
                                     <div class="btn-group">
                                         <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location.href='/prod/${prod[2].id}'">Подробнее</button>
                                     </div>
-                                    <small class="text-body-secondary">${prod[2].price} &#8381;</small>
+                                    <small class="text-body-secondary price">${prod[2].price}</small>
                                     <small class="text-body-secondary">${prod[2].dateOfCreated.toLocalDate()}  ${prod[2].dateOfCreated.toLocalTime()}</small>
                                 </div>
                             </div>
@@ -155,4 +156,23 @@
     </div>
 </main>
 </body>
+<script>
+    const elements = document.getElementsByClassName("price")
+    for (let i = 0; i < elements.length; i++){
+        let text = elements[i].innerHTML
+        if(text === "0"){
+            elements[i].innerHTML = "Бесплатно"
+        }
+        else {
+            elements[i].innerHTML = elements[i].innerHTML + " &#8381;"
+        }
+    }
+
+    const images = document.getElementsByClassName("image")
+    for(let i = 0; i < images.length; i++){
+        images[i].onerror = function () {
+            images[i].src = "https://t4.ftcdn.net/jpg/04/99/93/31/360_F_499933117_ZAUBfv3P1HEOsZDrnkbNCt4jc3AodArl.jpg"
+        }
+    }
+</script>
 </html>
