@@ -87,7 +87,7 @@
                                             <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location.href='/prod/${prod[0].id}'">Подробнее</button>
                                         </div>
                                         <small class="text-body-secondary price">${prod[0].price}</small>
-                                        <small class="text-body-secondary">${prod[0].dateOfCreated.toLocalDate()}  ${prod[0].dateOfCreated.toLocalTime()}</small>
+                                        <small class="text-body-secondary">${prod[0].dateOfCreated.toLocalDate()}  ${prod[0].dateOfCreated.getHour()}:${prod[0].dateOfCreated.getMinute()}</small>
                                     </div>
                                 </div>
                             </div>
@@ -105,7 +105,7 @@
                                         <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location.href='/prod/${prod[1].id}'">Подробнее</button>
                                     </div>
                                     <small class="text-body-secondary price">${prod[1].price}</small>
-                                    <small class="text-body-secondary">${prod[1].dateOfCreated.toLocalDate()}  ${prod[1].dateOfCreated.toLocalTime()}</small>
+                                    <small class="text-body-secondary">${prod[1].dateOfCreated.toLocalDate()}  ${prod[1].dateOfCreated.getHour()}:${prod[1].dateOfCreated.getMinute()}</small>
                                 </div>
                             </div>
                         </div>
@@ -123,7 +123,7 @@
                                         <button type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location.href='/prod/${prod[2].id}'">Подробнее</button>
                                     </div>
                                     <small class="text-body-secondary price">${prod[2].price}</small>
-                                    <small class="text-body-secondary">${prod[2].dateOfCreated.toLocalDate()}  ${prod[2].dateOfCreated.toLocalTime()}</small>
+                                    <small class="text-body-secondary">${prod[2].dateOfCreated.toLocalDate()}  ${prod[2].dateOfCreated.getHour()}:${prod[2].dateOfCreated.getMinute()}</small>
                                 </div>
                             </div>
                         </div>

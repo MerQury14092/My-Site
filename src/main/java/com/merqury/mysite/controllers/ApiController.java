@@ -16,7 +16,10 @@ public class ApiController {
     GetIpService service;
     @GetMapping
     public String getApiDoc(Model model) throws IOException {
-        model.addAttribute("ip", service.getIP());
+        String ip = service.getIP();
+        if(ip.equals("194.87.234.38"))
+            ip = "merqury.fun";
+        model.addAttribute("ip", ip);
         return "apidoc";
     }
 }
