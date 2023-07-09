@@ -1,6 +1,5 @@
-package com.merqury.mysite.controllers.rest;
+package com.merqury.mysite.controller;
 
-import com.merqury.mysite.controllers.ProductController;
 import com.merqury.mysite.models.products.Product;
 import com.merqury.mysite.models.api.Responce;
 import com.merqury.mysite.services.ProductService;
@@ -39,9 +38,8 @@ public class RestProductController {
         return new Responce(200, "OK");
     }
 
-    @PutMapping("/{idStr}")
-    public Responce changeProduct(@RequestBody Product product, @PathVariable String idStr){
-        long id = ProductController.parseId(idStr);
+    @PutMapping("/{id}")
+    public Responce changeProduct(@RequestBody Product product, @PathVariable long id){
         if(id == 0)
             return new Responce(403, "Forbidden");
         Product real = service.getProductById(id);

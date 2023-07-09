@@ -1,6 +1,5 @@
 package com.merqury.mysite.models.auth;
 
-import com.merqury.mysite.enums.Role;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -8,6 +7,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 
@@ -26,12 +26,9 @@ public class User {
     private String email;
     @Column(name = "password")
     private String password;
-    @Column(name = "active")
-    private boolean active;
+    @CreatedDate
     @Column(name = "date_of_create")
     private LocalDateTime createDateTime;
-    @Column(name = "role")
-    private Role role;
     @Column(name = "token")
     private String token;
 }
