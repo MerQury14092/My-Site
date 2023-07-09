@@ -3,7 +3,7 @@ package com.merqury.mysite.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.merqury.mysite.models.Product;
+import com.merqury.mysite.models.products.Product;
 import com.merqury.mysite.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

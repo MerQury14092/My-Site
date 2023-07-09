@@ -1,4 +1,4 @@
-package com.merqury.mysite.models;
+package com.merqury.mysite.models.products;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

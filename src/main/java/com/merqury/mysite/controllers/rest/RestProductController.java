@@ -1,8 +1,7 @@
 package com.merqury.mysite.controllers.rest;
 
 import com.merqury.mysite.controllers.ProductController;
-import com.merqury.mysite.models.Product;
-import com.merqury.mysite.models.api.DeleteRequest;
+import com.merqury.mysite.models.products.Product;
 import com.merqury.mysite.models.api.Responce;
 import com.merqury.mysite.services.ProductService;
 import lombok.AllArgsConstructor;

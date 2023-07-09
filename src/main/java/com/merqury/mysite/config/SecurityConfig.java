@@ -10,11 +10,13 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl;
@@ -40,29 +42,27 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .authorizeHttpRequests()
+        http.csrf(AbstractHttpConfigurer::disable);
+
+        http.authorizeHttpRequests((auth) -> auth
                 .anyRequest()
-                .authenticated()
-                .and()
-                .formLogin()
-                /*.loginPage("/auth/login").permitAll()
-                .defaultSuccessUrl("/auth/success")*/;
+                .authenticated());
+
+        http.formLogin(Customizer.withDefaults());
+
         return http.build();
     }
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer(){
-        return web -> {
-            web.ignoring().requestMatchers(HttpMethod.GET, "/", "/api/**", "/error", "/api", "/auth/**")
+        return web ->
+            web.ignoring().requestMatchers(HttpMethod.GET, "/", "/api/**", "/error", "/auth/**")
                     .and()
                     .ignoring().requestMatchers(HttpMethod.POST, "/api/**", "/auth/**")
                     .and()
                     .ignoring().requestMatchers(HttpMethod.DELETE, "/api/**")
                     .and()
                     .ignoring().requestMatchers(HttpMethod.PUT, "/api/**");
-        };
     }
 
     @Bean

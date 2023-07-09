@@ -23,13 +23,15 @@ public class User {
     @Column(name = "username")
     private String username;
     @Column(name = "email")
-    String email;
+    private String email;
     @Column(name = "password")
-    String password;
+    private String password;
     @Column(name = "active")
     private boolean active;
     @Column(name = "date_of_create")
     private LocalDateTime createDateTime;
     @Column(name = "role")
     private Role role;
+    @Column(name = "token")
+    private String token;
 }
