@@ -1,6 +1,6 @@
 package com.merqury.mysite.controller;
 
-import com.merqury.mysite.models.api.Responce;
+import com.merqury.mysite.models.api.Response;
 import com.merqury.mysite.models.auth.User;
 import com.merqury.mysite.services.UserService;
 import jakarta.websocket.server.PathParam;
@@ -29,12 +29,12 @@ public class AuthController {
         if(user == null)
             return "no user";
 
-        return user.getEmail();
+        return user.getUsername();
     }
 
     @PostMapping("/registration")
-    public Responce registration(@RequestBody User user){
-        boolean register = userService.register(user.getUsername(), user.getEmail(), user.getPassword());
-        return register?Responce.OK:(new Responce(400, "user already exists"));
+    public Response registration(@RequestBody User user){
+        boolean register = userService.register(user.getUsername(), user.getPassword());
+        return register? Response.OK:(new Response(400, "user already exists"));
     }
 }

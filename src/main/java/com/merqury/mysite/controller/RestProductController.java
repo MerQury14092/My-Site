@@ -1,8 +1,11 @@
 package com.merqury.mysite.controller;
 
+import com.merqury.mysite.models.auth.User;
 import com.merqury.mysite.models.products.Product;
-import com.merqury.mysite.models.api.Responce;
+import com.merqury.mysite.models.api.Response;
 import com.merqury.mysite.services.ProductService;
+import com.merqury.mysite.services.UserService;
+import jakarta.websocket.server.PathParam;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,8 +16,9 @@ import java.util.List;
 @RequestMapping("/api/prod")
 public class RestProductController {
     private ProductService service;
+    private UserService userService;
 
-    @GetMapping("/")
+    @GetMapping
     public List<Product> productList(){
         return service.getProducts();
     }
@@ -24,39 +28,51 @@ public class RestProductController {
         return service.getProductById(id);
     }
 
-    @PostMapping("/")
-    public Responce addProduct(@RequestBody Product prod){
+    @PostMapping
+    public Response addProduct(@RequestBody Product prod, @PathParam("") String token){
+        User user = userService.getByToken(token);
+        if(user == null)
+            return Response.UNAUTHORIZED;
         if(prod.getTitle() == null)
-            return new Responce(400, "Bad Request: title must not be null");
+            return new Response(400, "Bad Request: title must not be null");
         if(prod.getCity() == null)
-            return new Responce(400, "Bad Request: city must not be null");
+            return new Response(400, "Bad Request: city must not be null");
         if(prod.getPrice() < 0)
-            return new Responce(400, "Bad Request: price must be positive");
-        if(prod.getAuthor() == null)
-            return new Responce(400, "Bad Request: author must not be null");
+            return new Response(400, "Bad Request: price must be positive");
+        prod.setAuthor(user.getUsername());
         service.addProduct(prod);
-        return new Responce(200, "OK");
+        return new Response(200, "OK");
     }
 
     @PutMapping("/{id}")
-    public Responce changeProduct(@RequestBody Product product, @PathVariable long id){
+    public Response changeProduct(@RequestBody Product product, @PathVariable long id, @PathParam("") String token){
+        User user = userService.getByToken(token);
+        if(user == null)
+            return Response.UNAUTHORIZED;
         if(id == 0)
-            return new Responce(403, "Forbidden");
+            return Response.FORBIDDEN;
         Product real = service.getProductById(id);
         if(real == null)
-            return new Responce(404, "Not Found");
+            return Response.NOT_FOUND;
+        if(!user.getUsername().equals(real.getAuthor()))
+            return Response.FORBIDDEN;
         service.changeProduct(id, product);
-        return new Responce(200, "OK");
+        return Response.OK;
     }
 
     @DeleteMapping("/{id}")
-    public Responce rmProduct(@PathVariable long id){
+    public Response rmProduct(@PathVariable long id, @PathParam("") String token){
+        User user = userService.getByToken(token);
+        if(user == null)
+            return Response.UNAUTHORIZED;
         if(id == 0)
-            return new Responce(403, "Forbidden");
+            return Response.FORBIDDEN;
         Product product = service.getProductById(id);
         if(product == null)
-            return new Responce(404, "Not found");
+            return Response.NOT_FOUND;
+        if(!user.getUsername().equals(product.getAuthor()))
+            return Response.FORBIDDEN;
         service.rmProduct(id);
-        return new Responce(200, "OK");
+        return Response.OK;
     }
 }

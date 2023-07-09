@@ -19,8 +19,8 @@ public class UserService {
         return repository.findByToken(token).orElse(null);
     }
 
-    public String getToken(String email, String password){
-        User user = repository.findByEmail(email).orElse(null);
+    public String getToken(String username, String password){
+        User user = repository.findByUsername(username).orElse(null);
         if(user == null)
             return null;
 
@@ -30,14 +30,13 @@ public class UserService {
         return user.getToken();
     }
 
-    public boolean register(String username, String email, String password){
-        if(repository.findByEmail(email).orElse(null) != null)
+    public boolean register(String username, String password){
+        if(repository.findByUsername(username).orElse(null) != null)
             return false;
         User user = new User();
-        user.setEmail(email);
         user.setUsername(username);
         user.setPassword(encoder.encode(password));
-        user.setToken(encoder.encode(String.format("%s:%s", email, password)));
+        user.setToken(encoder.encode(String.format("%s:%s", username, password)));
         repository.save(user);
         return true;
     }

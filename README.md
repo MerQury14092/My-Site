@@ -1,32 +1,84 @@
-<h1>Регистрация</h1>
+<h2>Регистрация</h2>
 <p>Что бы зарегистрироваться, отправьте http запрос методом POST, в теле которого будет JSON-объект, содержащий три свойства:</p>
 
 * ***username*** - имя пользователя
-* ***email*** - адрес электронной почты
 * ***password*** - пароль
 
-на URL: **http://merqury.fun/api/auth/registration**
+URL: **http://merqury.fun/api/auth/registration**
 <hr>
 
-<h1>Получение токена</h1>
+<h2>Получение токена</h2>
 <p>Что бы получить API токен, отправьте http запрос методом GET с такими параметрами:</p>
 
-* ***email*** - адрес электронной почты
+* ***username*** - имя пользователя
 * ***password*** - пароль
 
-на URL: **http://merqury.fun/api/auth/token**
+URL: **http://merqury.fun/api/auth/token**
 <hr>
-  <h1>Get list products</h1>
-    <p>For getting list of products, you should complete GET request on http://merqury.fun/api/prod/</p>
-    <hr>
-    <h1>Get product by id</h1>
-    <p>For getting product by id, you should complete GET request on http://merqury.fun/api/prod/{id}</p>
-    <hr>
-    <h1>Add product</h1>
-    <p>For adding product, you should complete POST request with json object in body on http://merqury.fun/api/prod/</p>
-    <hr>
-    <h1>Remove product by id</h1>
-    <p>For removing product by id, you should complete DELETE request on http://merqury.fun/api/prod/{id}</p>
-    <hr>
-    <h1>Change product by id</h1>
-    <p>For changing product by id, you should complete PUT request with json object(Product, which contains only changing properties) in body on http://merqury.fun/api/prod/{id}</p>
+<h2>Получение списка продуктов</h2>
+<p>Для получения списка товаров, выполните http запрос методом GET</p>
+
+URL: ***http://merqury.fun/api/prod***
+<br><br>
+Если хотите получить отдельный товар по ID, то тогда к URL добавьте `/<id>`
+<hr>
+
+<h1>ВНИМНИЕ!!!</h1>
+<p>Все нижеописанные запросы должны быть авторизованны</p>
+<p>Для авторизации добавьте URL параметр:</p>
+
+* `token=<your token>`
+<hr>
+
+<h2>Добавление продукта</h2>
+<p>Для добавления продукта выполните http запрос методом POST, в теле которого будет JSON-объект описывающий модель продукта, исключая эти свойства:</p>
+
+* ***id*** - это свойство присваивается автоматически сервером
+* ***author*** - в этом поле будет ***username*** пользователя, добавляющего продукт
+* ***dateOfCreated*** - это свойство присваивается автоматически сервером
+
+<p>Так же опциональны эти свойства:</p>
+
+* ***description*** - автоматически добавится описание "No description"
+* ***urlToImage***
+
+URL: ***http://merqury.fun/api/prod***
+<hr>
+
+<h2>Изменение продукта по ID</h2>
+<p>Для изменения продукта по ID, выполните http запрос методом PUT, в теле которого будет JSON-объект с изменяемыми свойствами продукта</p>
+
+URL: ***http://merqury.fun/api/prod/<id>***
+<hr>
+
+<h2>Удаление продукта по ID</h2>
+<p>Для удаления продукта по ID, выполните http запрос методом DELETE</p>
+
+URL: ***http://merqury.fun/api/prod/<id>***
+
+<hr>
+<hr>
+<h3>Модель продукта:</h3>
+
+```
+{
+    "id": "идентификатор продукта",
+    "title": "имя продукта",
+    "description": "описание продукта",
+    "price": 100, // цена продукта
+    "author": "автор",
+    "city": "город",
+    "dateOfCreated": "дата создания продукта",
+    "urlToImage": "путь до изображения товара"
+}
+```
+<br>
+<p>Так же при запросах в большинстве случаев вы получите ответ в формате JSON</p>
+<h3>Модель ответа:</h3>
+
+```
+{
+    "response_code": 200, // код ответа (в основном используются коды HTTP)
+    "response_text": "описание ответа"
+}
+```
