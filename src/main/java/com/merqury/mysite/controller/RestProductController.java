@@ -24,7 +24,7 @@ public class RestProductController {
         return service.getProducts();
     }
 
-    @GetMapping("{author}")
+    @GetMapping("/by/{author}")
     public List<Product> productListByUser(@PathVariable String author){
         return service.getProductsByAuthor(author);
     }

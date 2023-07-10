@@ -54,7 +54,7 @@ public class UserController {
     public Response changePassword(@RequestBody User user, @PathParam("") String token){
         User usr = userService.getByToken(token);
 
-        if(user == null)
+        if(usr == null)
             return Response.UNAUTHORIZED;
         if(!usr.getUsername().equals(user.getUsername()))
             return Response.FORBIDDEN;
