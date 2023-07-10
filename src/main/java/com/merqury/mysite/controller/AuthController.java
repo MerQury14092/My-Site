@@ -16,10 +16,10 @@ public class AuthController {
     }
 
     @GetMapping("/token")
-    public String getToken(@PathParam("") String username,
+    public Response getToken(@PathParam("") String username,
                            @PathParam("") String password){
         String token = userService.getToken(username, password);
-        return token==null?"Bad credentials":token;
+        return token==null?(new Response(400, "Bad credentials")):(new Response(200, token));
     }
 
     @GetMapping("/whois")

@@ -13,6 +13,8 @@ URL: **http://merqury.fun/api/auth/registration**
 * ***username*** - имя пользователя
 * ***password*** - пароль
 
+В результате вам вернётся ответ в JSON и если пользователь будет найден, токен будет записан в свойстве `response_text`
+
 URL: **http://merqury.fun/api/auth/token**
 <hr>
 <h2>Получение списка продуктов</h2>
