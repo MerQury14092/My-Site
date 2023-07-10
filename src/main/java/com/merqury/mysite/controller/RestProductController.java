@@ -7,6 +7,7 @@ import com.merqury.mysite.services.ProductService;
 import com.merqury.mysite.services.UserService;
 import jakarta.websocket.server.PathParam;
 import lombok.AllArgsConstructor;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +22,11 @@ public class RestProductController {
     @GetMapping
     public List<Product> productList(){
         return service.getProducts();
+    }
+
+    @GetMapping("{author}")
+    public List<Product> productListByUser(@PathVariable String author){
+        return service.getProductsByAuthor(author);
     }
 
     @GetMapping("/{id}")

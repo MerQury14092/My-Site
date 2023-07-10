@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth")
-public class AuthController {
+public class UserController {
     private final UserService userService;
-    public AuthController(@Qualifier("userService") UserService userService) {
+    public UserController(@Qualifier("userService") UserService userService) {
         this.userService = userService;
     }
 
@@ -23,18 +23,43 @@ public class AuthController {
     }
 
     @GetMapping("/whois")
-    public String getUsername(@PathParam("") String token){
+    public Response getUsername(@PathParam("") String token){
         User user = userService.getByToken(token);
 
         if(user == null)
-            return "no user";
+            return Response.NOT_FOUND;
 
-        return user.getUsername();
+        return new Response(200, user.getUsername());
     }
 
     @PostMapping("/registration")
     public Response registration(@RequestBody User user){
         boolean register = userService.register(user.getUsername(), user.getPassword());
         return register? Response.OK:(new Response(400, "user already exists"));
+    }
+
+    @DeleteMapping("/user")
+    public Response deleteUser(@PathParam("") String token){
+        User user = userService.getByToken(token);
+
+        if(user == null)
+            return Response.UNAUTHORIZED;
+        if(!user.getToken().equals(token))
+            return Response.FORBIDDEN;
+        userService.deleteUserById(user.getId());
+        return Response.OK;
+    }
+
+    @PutMapping("/user")
+    public Response changePassword(@RequestBody User user, @PathParam("") String token){
+        User usr = userService.getByToken(token);
+
+        if(user == null)
+            return Response.UNAUTHORIZED;
+        if(!usr.getUsername().equals(user.getUsername()))
+            return Response.FORBIDDEN;
+
+        userService.changeUserPassword(user.getUsername(), user.getPassword());
+        return Response.OK;
     }
 }

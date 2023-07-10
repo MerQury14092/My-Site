@@ -18,6 +18,10 @@ public class ProductService {
         return repository.findAll();
     }
 
+    public List<Product> getProductsByAuthor(String author){
+        return repository.findAllByAuthor(author);
+    }
+
     public List<List<Product>> getProductsInTriangles(){
         List<Product> all = repository.findAll();
         List<List<Product>> res = new ArrayList<>();

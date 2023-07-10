@@ -40,4 +40,22 @@ public class UserService {
         repository.save(user);
         return true;
     }
+
+    public User getUserById(long id){
+        return repository.findById(id).orElse(null);
+    }
+
+    public void deleteUserById(long id){
+        repository.deleteById(id);
+    }
+
+    public boolean changeUserPassword(String username, String password){
+        User user = repository.findByUsername(username).orElse(null);
+        if(user == null)
+            return false;
+        user.setPassword(encoder.encode(password));
+        user.setToken(encoder.encode(String.format("%s:%s", username, password)));
+        repository.flush();
+        return true;
+    }
 }
