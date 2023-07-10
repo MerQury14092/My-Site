@@ -41,7 +41,8 @@ URL: ***http://merqury.fun/api/prod***
 
 <h2>Изменение пользователя</h2>
 Для изменения пользователя, вы должны отправить http запрос методом PUT, в теле которого будет JSON объект с изменяемыми свойствами
-([модель пользователя](https://github.com/MerQury14092/My-Site#модель-данных-пользователя))
+
+([модель пользователя](https://github.com/MerQury14092/My-Site#%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C-%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85-%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8F))
 
 URL: ***http://merqury.fun/api/auth/user***
 <hr>
@@ -81,6 +82,7 @@ URL: ***http://merqury.fun/api/prod***
 
 <h2>Изменение продукта по ID</h2>
 Для изменения продукта по ID, выполните http запрос методом PUT, в теле которого будет JSON-объект с изменяемыми свойствами продукта
+
 ([модель продукта](https://github.com/MerQury14092/My-Site#%D0%BC%D0%BE%D0%B4%D0%B5%D0%BB%D1%8C-%D0%BF%D1%80%D0%BE%D0%B4%D1%83%D0%BA%D1%82%D0%B0))
 
 URL: ***http://merqury.fun/api/prod/{id}***
